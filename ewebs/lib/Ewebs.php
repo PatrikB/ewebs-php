@@ -15,7 +15,7 @@ class Ewebs
 {
     
     public static $apiKey;
-    public static $apiBase = 'https://dashboard.ewebs.se/api/v1/';
+    public static $apiBase  = 'https://dashboard.ewebs.se/api/v1/';
     
     const VERSION = '1.0.0';
     

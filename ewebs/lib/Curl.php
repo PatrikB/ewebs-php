@@ -18,6 +18,13 @@ class Curl
     private $timeout = self::DEFAULT_TIMEOUT;
     private $connectTimeout = self::DEFAULT_CONNECT_TIMEOUT;
     
+    public static function caBundle()
+    {
+        
+        return dirname(__FILE__) . '/../data/ca-bundle.pem';
+        
+    }
+    
     public function request($method, $absUrl, $id, $params = null)
     {
         
@@ -32,6 +39,8 @@ class Curl
                 CURLOPT_TIMEOUT => $this->timeout,
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_URL => $absUrl . '/' . $id,
+                CURLOPT_CAINFO => self::caBundle(),
+                CURLOPT_CAPATH => self::caBundle()
             ));
             
             $response = curl_exec($curl);
@@ -58,7 +67,9 @@ class Curl
                 CURLOPT_TIMEOUT => $this->timeout,
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_URL => $absUrl,
-                CURLOPT_POSTFIELDS => $data
+                CURLOPT_POSTFIELDS => $data,
+                CURLOPT_CAINFO => self::caBundle(),
+                CURLOPT_CAPATH => self::caBundle()
             ));
             
             $response = curl_exec($curl);
